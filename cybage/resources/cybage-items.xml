@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	
+	<collectiontypes>
+	
+		<collectiontype code="managerlist" elementtype="CybageEmployee" 
+		autocreate="true" generate="false"	type="list" />	
+			
+	</collectiontypes>
+	<relations>
+		<relation code="Employee2Project" generate="true" localized="false" autocreate="true">
+		   <deployment table="Employee2Project" typecode="1231"/>
+		    <sourceElement type="CybageEmployee" cardinality="many" qualifier="cybempId">		    	
+		     </sourceElement>
+		    <targetElement type="CybageProject" cardinality="many" qualifier="projectManagers">		   
+		    </targetElement>
+		</relation>
+	</relations>
+			
+	<itemtypes> 	
+		<itemtype generate="true"
+		   code="CybageEmployee"
+		   extends="Customer"
+		   autocreate="true"
+		>
+			<attributes>
+				<attribute qualifier="managers" type="managerlist">
+					<description>Manager is CybageEmployee Type</description>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="isManager" type="java.lang.Boolean">
+					<description>If Manager, Show list of Employee</description>
+               <persistence type="property"/>
+				</attribute>
+				<attribute qualifier="firstName" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="lastName" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="cybempId" type="int">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="empPassword" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+							
+				
+			</attributes>
+		</itemtype>
+				
+		<itemtype generate="true"
+		   code="CybageProject"
+		   extends="GenericItem"
+		   autocreate="true"
+		>
+		<deployment table="CybageProject" typecode="12341"/>
+			<attributes>								
+				<attribute qualifier="projectName" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="projectId" type="int">
+					<persistence type="property"/>
+				</attribute>
+				
+				
+				
+			</attributes>
+		</itemtype>
+	
+	</itemtypes>
+</items>
